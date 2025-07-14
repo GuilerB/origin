@@ -23,13 +23,29 @@ public:
     }
 };
 
+void counterOps(Counter& counter) {
+    while (true) {
+        char oper{ '0' };
+        std::cout << "Введите команду ('+', '-', '=' или '*'): ";
+        std::cin >> oper;
+        switch (oper) {
+        case ('+'): counter.add(); break;
+        case ('-'):  counter.subtract(); break;
+        case ('='): counter.print_val(); break;
+        case ('*'):
+            std::cout << "До свидания!";
+            return;
+            //break;
+        }
+    }
+}
+
 int main()
 {
     setlocale(LC_ALL, "Russian");
     system("chcp 1251"); // настраиваем кодировку консоли
     std::cout << "\n";
 
-    char oper{ '0' };
     std::string check_init{ "0" };
 
     std::cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
@@ -40,33 +56,13 @@ int main()
             long init_value;
             std::cin >> init_value;
             Counter counter(init_value);
-            while (true) {
-                std::cout << "Введите команду ('+', '-', '=' или '*'): ";
-                std::cin >> oper;
-                switch (oper) {
-                case ('+'): counter.add(); break;
-                case ('-'):  counter.subtract(); break;
-                case ('=') : counter.print_val(); break;
-                case ('*'):
-                    std::cout << "До свидания!";
-                    return 0;
-                }
-            }
+            counterOps(counter);
+            return 0;
         }
         else if (check_init == "нет") {
             Counter counter;
-            while (true) {    
-                std::cout << "Введите команду ('+', '-', '=' или '*'): ";
-                std::cin >> oper;
-                switch (oper) {
-                case ('+'): counter.add(); break;
-                case ('-'):  counter.subtract(); break;
-                case ('='): counter.print_val(); break;
-                case ('*'):
-                    std::cout << "До свидания!";
-                    return 0;
-                }
-            }
+            counterOps(counter);
+            return 0;
         }
         else {
             std::cout << "Введите да или нет: ";
