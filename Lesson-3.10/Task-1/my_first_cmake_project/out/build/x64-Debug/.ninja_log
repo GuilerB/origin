@@ -1,0 +1,7 @@
+# ninja log v6
+2	243	7773134366280638	CMakeFiles/my_first_cmake_program.dir/In_Out_Name.cpp.obj	dce596ab85bf7afd
+244	428	7773134368705421	my_first_cmake_program.exe	1d461b4176eb9c14
+11	283	7773134769140351	CMakeFiles/my_first_cmake_program.dir/In_Out_Name.cpp.obj	dce596ab85bf7afd
+283	397	7773134771861487	my_first_cmake_program.exe	1d461b4176eb9c14
+12	253	7773134934341224	CMakeFiles/my_first_cmake_program.dir/In_Out_Name.cpp.obj	dce596ab85bf7afd
+254	376	7773134936768487	my_first_cmake_program.exe	1d461b4176eb9c14

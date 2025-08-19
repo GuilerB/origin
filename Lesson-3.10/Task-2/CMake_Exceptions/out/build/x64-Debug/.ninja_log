@@ -1,0 +1,27 @@
+# ninja log v6
+10	355	7773165179260622	CMakeFiles/my_executable.dir/FigureCreationExc.cpp.obj	839ed2e57233c453
+631	892	7773165185470611	my_executable.exe	2ce4e002059f45bd
+38	544	7773165179550724	CMakeFiles/my_executable.dir/Triangle_equalAllSides.cpp.obj	be429f75aea56072
+42	582	7773165179590621	CMakeFiles/my_executable.dir/Triangle_equal2sides.cpp.obj	abfe28b65b25a472
+17	547	7773165179340635	CMakeFiles/my_executable.dir/Quadrangle_PrllGrmm.cpp.obj	2c2deaa09b5cdbb7
+30	557	7773165179470625	CMakeFiles/my_executable.dir/Square.cpp.obj	24a166346041465c
+14	562	7773165179301439	CMakeFiles/my_executable.dir/Quadrangle.cpp.obj	53aa97f7e8f3545a
+26	571	7773165179431868	CMakeFiles/my_executable.dir/Romb.cpp.obj	553191567fa2660
+2	567	7773165179191147	CMakeFiles/my_executable.dir/3.8.2_Exceptions_Constructors.cpp.obj	4ad8aa17395dd2e0
+6	620	7773165179221733	CMakeFiles/my_executable.dir/Figure.cpp.obj	4a9dcc3891abd722
+34	623	7773165179510623	CMakeFiles/my_executable.dir/Triangle.cpp.obj	7ff17fe65af0698a
+22	626	7773165179391385	CMakeFiles/my_executable.dir/Quadrangle_PrUg.cpp.obj	340bb8f8c484477
+47	630	7773165179641980	CMakeFiles/my_executable.dir/Triangle_90deg.cpp.obj	5318de9fbe4c1481
+20	376	7773165908190346	CMakeFiles/cmake_exceptions.dir/FigureCreationExc.cpp.obj	e04d52f91dedad05
+23	543	7773165908221309	CMakeFiles/cmake_exceptions.dir/Quadrangle.cpp.obj	75423947e2999613
+16	548	7773165908150770	CMakeFiles/cmake_exceptions.dir/Figure.cpp.obj	3a7bcc64e0385453
+38	556	7773165908379822	CMakeFiles/cmake_exceptions.dir/Square.cpp.obj	e3785fd97be68d3c
+42	558	7773165908419822	CMakeFiles/cmake_exceptions.dir/Triangle.cpp.obj	ec93cb1d3f8e9a99
+54	568	7773165908539824	CMakeFiles/cmake_exceptions.dir/Triangle_90deg.cpp.obj	4eab4e8ecd4c0a7a
+46	570	7773165908459823	CMakeFiles/cmake_exceptions.dir/Triangle_equalAllSides.cpp.obj	98735f9899a8af92
+50	573	7773165908489827	CMakeFiles/cmake_exceptions.dir/Triangle_equal2sides.cpp.obj	f325dbc75f85a7e5
+30	577	7773165908299825	CMakeFiles/cmake_exceptions.dir/Quadrangle_PrUg.cpp.obj	c579bb3341a29665
+26	605	7773165908259823	CMakeFiles/cmake_exceptions.dir/Quadrangle_PrllGrmm.cpp.obj	739e59b553111c61
+12	619	7773165908120507	CMakeFiles/cmake_exceptions.dir/3.8.2_Exceptions_Constructors.cpp.obj	e69b59df479d5909
+34	642	7773165908339824	CMakeFiles/cmake_exceptions.dir/Romb.cpp.obj	d09651f4a3bc5e51
+643	849	7773165914419670	cmake_exceptions.exe	60c0eae97401f849
