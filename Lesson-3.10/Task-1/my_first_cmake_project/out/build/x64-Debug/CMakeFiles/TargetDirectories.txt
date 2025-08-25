@@ -1,3 +1,0 @@
-C:/Users/Admin/Desktop/git_Netology_cpp/Lesson-3.10/Task-1/my_first_cmake_project/out/build/x64-Debug/CMakeFiles/my_first_cmake_program.dir
-C:/Users/Admin/Desktop/git_Netology_cpp/Lesson-3.10/Task-1/my_first_cmake_project/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/Admin/Desktop/git_Netology_cpp/Lesson-3.10/Task-1/my_first_cmake_project/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
