@@ -14,6 +14,7 @@ public:
         std::cout << "Connected to database" << std::endl;
     }
 
+    // create tables
     void createTables() {
         pqxx::work txn(conn);  
         txn.exec("CREATE TABLE IF NOT EXISTS clients ("
@@ -30,6 +31,7 @@ public:
         std::cout << "Tables created" << std::endl;
     }
 
+    // add client
     int addClient(const std::string& fname, const std::string& lname, const std::string& email) {
         pqxx::work txn(conn);
         pqxx::result r = txn.exec(
@@ -41,7 +43,7 @@ public:
         std::cout << "Client added, ID: " << id << std::endl;
         return id;
     }
-
+    // add phone
     void addPhone(int client_id, const std::string& phone) {
         pqxx::work txn(conn);
         txn.exec(
@@ -51,6 +53,7 @@ public:
         std::cout << "Phone added" << std::endl;
     }
 
+    // update client
     void updateClient(int client_id, const std::string& fname = "",
         const std::string& lname = "", const std::string& email = "") {
         pqxx::work txn(conn);
@@ -77,6 +80,7 @@ public:
         std::cout << "Client updated" << std::endl;
     }
 
+    // delete phone number
     void deletePhone(int client_id, const std::string& phone) {
         pqxx::work txn(conn);
         txn.exec(
@@ -87,6 +91,7 @@ public:
         std::cout << "Phone deleted" << std::endl;
     }
 
+    // delete a client
     void deleteClient(int client_id) {
         pqxx::work txn(conn);
         txn.exec("DELETE FROM clients WHERE client_id = " + std::to_string(client_id));
@@ -101,8 +106,8 @@ public:
         txn.commit();
         std::cout << table + " deleted" << std::endl;
     }
-    // 
-
+     
+    // find clients
     void findClients(const std::string& search) {
         pqxx::work txn(conn);
 
@@ -144,6 +149,7 @@ public:
         }
     }
 
+    // show client info
     void showClientInfo(int client_id) {
         pqxx::work txn(conn);
 
@@ -176,6 +182,7 @@ public:
         std::cout << std::endl;
     }
 
+    // show all
     void showAllClients() {
         pqxx::work txn(conn);
 
@@ -207,11 +214,11 @@ int main() {
        
         std::cout << "\n" << std::endl;
 
-        // Создание таблиц
+        // Create tables
         mgr.createTables();
         std::cout << "Tables ready" << std::endl;
 
-        // Добавление клиентов
+        // Add clients
         std::cout << "\nAdding clients..." << std::endl;
         int id1 = mgr.addClient("Andrey", "Viktorov", "andrey@mail.com");
         std::cout << "\nAndrey added..." << std::endl;
@@ -221,33 +228,33 @@ int main() {
         int id2 = mgr.addClient("George", "Allison", "george@mail.com");
         mgr.addPhone(id2, "+79261234567");
 
-        // Показать всех
+        // Show all
         mgr.showAllClients();
 
-        // Поиск
+        // Search
         std::cout << "\n--- Search ---" << std::endl;
         mgr.findClients("Andrey");
         mgr.findClients("george@mail.com");
         mgr.findClients("+7916");
 
-        // Обновление
+        // Update
         std::cout << "\n--- Update test ---" << std::endl;
         mgr.updateClient(id1, "Andrey", "Viktorov", "andrey.new@mail.com");
         mgr.showClientInfo(id1);
 
-        // Удаление телефона
+        // Delete a phone number
         std::cout << "\n--- Delete phone ---" << std::endl;
         mgr.deletePhone(id1, "+79161234567");
         mgr.showClientInfo(id1);
 
-        // Удаление клиента
+        // Delete a client
         std::cout << "\n--- Delete client  ---" << std::endl;
         mgr.deleteClient(id2);
         mgr.showAllClients();
 
         std::cout << "\n=== All tests passed ===" << std::endl;
 
-        // Удаление данных из таблиц
+        // Delete data from tables
 
         std::string clients = "clients";
         std::string client_phones = "client_phones";
