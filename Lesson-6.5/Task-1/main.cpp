@@ -5,7 +5,7 @@
 
 class Client_Base {
 private:
-    pqxx::connection conn;  
+    pqxx::connection conn;
 public:
     Client_Base(const std::string& conn_str) : conn(conn_str) {
         if (!conn.is_open()) {
@@ -16,7 +16,7 @@ public:
 
     // create tables
     void createTables() {
-        pqxx::work txn(conn);  
+        pqxx::work txn(conn);
         txn.exec("CREATE TABLE IF NOT EXISTS clients ("
             "client_id SERIAL PRIMARY KEY, "
             "first_name VARCHAR(50) NOT NULL, "
@@ -106,13 +106,14 @@ public:
         txn.commit();
         std::cout << table + " deleted" << std::endl;
     }
-     
+
     // find clients
-    void findClients(const std::string& search) {
+    std::vector<int> findClients(const std::string& search) {
         pqxx::work txn(conn);
+        std::vector<int> client_ids;
 
         pqxx::result r = txn.exec(
-            "SELECT c.client_id, c.first_name, c.last_name, c.email FROM clients c "
+            "SELECT DISTINCT c.client_id FROM clients c "
             "LEFT JOIN client_phones cp ON c.client_id = cp.client_id "
             "WHERE c.first_name ILIKE '%" + txn.esc(search) + "%' OR "
             "c.last_name ILIKE '%" + txn.esc(search) + "%' OR "
@@ -120,33 +121,11 @@ public:
             "cp.phone_number ILIKE '%" + txn.esc(search) + "%' "
             "ORDER BY c.client_id");
 
-        std::cout << "\nFound " << r.size() << " client(s) for '" << search << "':" << std::endl;
-
-        for (int i = 0; i < r.size(); i++) {
-            auto row = r[i];
-            std::cout << "ID: " << row[0].as<int>() << std::endl;
-            std::cout << "Name: " << row[1].as<std::string>() << " "
-                << row[2].as<std::string>() << std::endl;
-            std::cout << "Email: " << row[3].as<std::string>() << std::endl;
-
-            pqxx::result phones = txn.exec(
-                "SELECT phone_number FROM client_phones "
-                "WHERE client_id = " + row[0].as<std::string>());
-
-            std::cout << "Phones: ";
-            for (int j = 0; j < phones.size(); j++) {
-                if (j > 0) std::cout << ", ";
-                std::cout << phones[j][0].as<std::string>();
-            }
-            if (phones.size() == 0) {
-                std::cout << "none";
-            }
-            std::cout << "\n---" << std::endl;
+        for (const auto& row : r) {
+            client_ids.push_back(row[0].as<int>());
         }
 
-        if (r.size() == 0) {
-            std::cout << "No clients found" << std::endl;
-        }
+        return client_ids;
     }
 
     // show client info
@@ -202,7 +181,7 @@ public:
 
 int main() {
     setlocale(LC_ALL, "Russian");
-    system("chcp 1251"); // настраиваем кодировку консоли
+    system("chcp 1251"); 
     std::cout << "\n\n\n";
 
     try {
@@ -211,7 +190,7 @@ int main() {
         Client_Base mgr(conn_str);
 
         std::cout << "=== Client Database System ===\n" << std::endl;
-       
+
         std::cout << "\n" << std::endl;
 
         // Create tables
@@ -231,11 +210,32 @@ int main() {
         // Show all
         mgr.showAllClients();
 
-        // Search
+        // Search 
         std::cout << "\n--- Search ---" << std::endl;
-        mgr.findClients("Andrey");
-        mgr.findClients("george@mail.com");
-        mgr.findClients("+7916");
+
+        std::cout << "\n" << std::endl;
+        std::cout << "Searching for 'Andrey':" << std::endl;
+        std::vector<int> found_ids = mgr.findClients("Andrey");
+        std::cout << "Found " << found_ids.size() << " client(s)" << std::endl;
+        for (int id : found_ids) {
+            mgr.showClientInfo(id);
+        }
+        
+        std::cout << "\n" << std::endl;
+        std::cout << "Searching for 'george@mail.com':" << std::endl;
+        found_ids = mgr.findClients("george@mail.com");
+        std::cout << "Found " << found_ids.size() << " client(s)" << std::endl;
+        for (int id : found_ids) {
+            mgr.showClientInfo(id);
+        }
+        
+        std::cout << "\n" << std::endl;
+        std::cout << "Searching for '+7916':" << std::endl;
+        found_ids = mgr.findClients("+7916");
+        std::cout << "Found " << found_ids.size() << " client(s)" << std::endl;
+        for (int id : found_ids) {
+            mgr.showClientInfo(id);
+        }
 
         // Update
         std::cout << "\n--- Update test ---" << std::endl;
@@ -269,5 +269,4 @@ int main() {
     }
 
     return 0;
-}   
-    
+}
