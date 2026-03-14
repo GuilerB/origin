@@ -1,75 +1,38 @@
 #include "mainwindow.h"
-#include <QGroupBox>
-#include <QRadioButton>
-#include <QComboBox>
-#include <QPushButton>
-#include <QProgressBar>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
     , progressValue(0)
 {
-    // Create a central widget
-    centralWidget = new QWidget(this);
+    ui->setupUi(this);
 
-    // Create vertical layout
-    mainLayout = new QVBoxLayout(centralWidget);
+    // RadioButton s name
+    ui->radioButton->setText("Painters");
+    ui->radioButton_2->setText("Musicians");
 
-    groupBox = new QGroupBox("Choose a study area");
+    // List filling
+    ui->comboBox->addItem("Camille Corot");
+    ui->comboBox->addItem("Edu Manet");
+    ui->comboBox->addItem("Johann Sebastian Bach");
+    ui->comboBox->addItem("Bruce Dickinson");
 
-    // Horizontal layout inside the group
-    QHBoxLayout *groupBoxLayout = new QHBoxLayout(groupBox);
+    ui->toggleButton->setText("A step in study progress!");
 
-    radioButton1 = new QRadioButton("Painters");
-    radioButton2 = new QRadioButton("Musicians");
+    ui->toggleButton->setCheckable(true);
 
-    groupBoxLayout->addWidget(radioButton1);
-    groupBoxLayout->addWidget(radioButton2);
-
-    groupBox->setLayout(groupBoxLayout);
-
-    // Combo list
-    comboBox = new QComboBox();
-    comboBox->addItem("Camille Corot");
-    comboBox->addItem("Edu Manet");
-    comboBox->addItem("Johann Sebastian Bach");
-    comboBox->addItem("Bruce Dickinson");
-
-    // Button
-    toggleButton = new QPushButton("A step in study progress!");
-    toggleButton->setCheckable(true);
-
-    // Progress bar
-    progressBar = new QProgressBar();
-    progressBar->setMinimum(0);
-    progressBar->setMaximum(100);
-    progressBar->setValue(0);
-
-    // Adding all widgets into the main layout
-    mainLayout->addWidget(groupBox);
-    mainLayout->addWidget(comboBox);
-    mainLayout->addWidget(toggleButton);
-    mainLayout->addWidget(progressBar);
-
-    // Adding streatchable area in the end
-    mainLayout->addStretch();
-
-    // Layout for the central widget
-    centralWidget->setLayout(mainLayout);
-
-    // Central widget as main window
-    setCentralWidget(centralWidget);
-
-    // connect a slot with a signal
-    connect(toggleButton, &QPushButton::clicked, this, &MainWindow::onToggleButtonClicked);
-
-    resize(350, 250);
-    setWindowTitle("Choose and study");
+    ui->progressBar->setMinimum(0);
+    ui->progressBar->setMaximum(100);
+    ui->progressBar->setValue(0);
 }
 
-void MainWindow::onToggleButtonClicked()
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::on_toggleButton_clicked()
 {
     progressValue += 10;
 
@@ -77,5 +40,5 @@ void MainWindow::onToggleButtonClicked()
         progressValue = 0;
     }
 
-    progressBar->setValue(progressValue);
+    ui->progressBar->setValue(progressValue);
 }

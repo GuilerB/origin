@@ -3,12 +3,11 @@
 
 #include <QMainWindow>
 
-class QGroupBox;
-class QRadioButton;
-class QComboBox;
-class QPushButton;
-class QProgressBar;
-class QVBoxLayout;
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class MainWindow;
+}
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -16,21 +15,14 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
 private slots:
-    void onToggleButtonClicked();
+    void on_toggleButton_clicked();
 
 private:
-    QGroupBox *groupBox;
-    QRadioButton *radioButton1;
-    QRadioButton *radioButton2;
-    QComboBox *comboBox;
-    QPushButton *toggleButton;
-    QProgressBar *progressBar;
-    QVBoxLayout *mainLayout;
-    QWidget *centralWidget;
-
+    Ui::MainWindow *ui;
     int progressValue;
 };
 
-#endif // MAINWINDOW_H
+#endif
