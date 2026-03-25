@@ -30,7 +30,7 @@ add_executable(Lesson-9-8_DataBase
 )
 
 target_link_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/PG_Libs)
-target_link_libraries(08_PreDataBase PRIVATE 
+target_link_libraries(Lesson-9-8_DataBase PRIVATE
     Qt6::Widgets
     Qt6::Sql
     Qt6::Concurrent
