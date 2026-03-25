@@ -162,21 +162,5 @@
  </widget>
  <resources/>
  <connections>
-  <!-- <connection>
-   <sender>pb_clear</sender>
-   <signal>clicked()</signal>
-   <receiver>tb_result</receiver>
-   <slot>clear()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>374</x>
-     <y>486</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>200</x>
-     <y>482</y>
-    </hint>
-   </hints>
-  </connection> -->
  </connections>
 </ui>
